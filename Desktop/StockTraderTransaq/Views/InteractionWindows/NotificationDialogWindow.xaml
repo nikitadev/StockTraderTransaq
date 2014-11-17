@@ -1,0 +1,26 @@
+﻿<cl:ChildWindow x:Class="StockTraderTransaq.InteractionWindowViews.NotificationDialogWindow"
+				   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+				   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:cl="clr-namespace:StockTraderTransaq.ControlLibrary;assembly=StockTraderTransaq.ControlLibrary"
+				   xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+				   xmlns:ei="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+                   x:Name="ShellModalDialogWindow" Title="{Binding Title}" Content="{Binding Content}" Background="{DynamicResource WindowBackgroundBrush}">
+    <cl:ChildWindow.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/StockTraderTransaq;component/Resources/Styles.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</cl:ChildWindow.Resources>
+
+    <cl:ChildWindow.Navigation>
+        <Button x:Name="OkButton" Grid.Row="1" Margin="0,31,0,0" IsCancel="True" HorizontalAlignment="Right" VerticalAlignment="Bottom" TabIndex="0" Template="{StaticResource SubmitButtonTemplate}" Cursor="Hand" Height="25">
+			<i:Interaction.Triggers>
+				<i:EventTrigger EventName="Click">
+					<ei:CallMethodAction TargetObject="{Binding ElementName=ShellModalDialogWindow}" MethodName="Close" />
+				</i:EventTrigger>
+			</i:Interaction.Triggers>
+		</Button>
+	</cl:ChildWindow.Navigation>
+	
+</cl:ChildWindow>

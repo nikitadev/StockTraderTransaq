@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<Color x:Key="WindowBackgroundColor">White</Color>
+	<Color x:Key="WindowBorderColor">#c23876</Color>
+    <Color x:Key="InactiveWindowBorderColor">#e3a5c1</Color>
+    
+	<SolidColorBrush x:Key="WindowBackgroundBrush" Color="{StaticResource WindowBackgroundColor}"/>
+	<SolidColorBrush x:Key="WindowBorderBrush" Color="{StaticResource WindowBorderColor}"/>
+    <SolidColorBrush x:Key="InactiveWindowBorderBrush" Color="{StaticResource InactiveWindowBorderColor}" />
+
+</ResourceDictionary>

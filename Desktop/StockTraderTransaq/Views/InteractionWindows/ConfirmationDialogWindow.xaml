@@ -1,0 +1,35 @@
+﻿<cl:ChildWindow x:Class="StockTraderTransaq.InteractionWindowViews.ConfirmationDialogWindow"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:cl="clr-namespace:StockTraderTransaq.ControlLibrary;assembly=StockTraderTransaq.ControlLibrary"
+                xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                xmlns:ei="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+                x:Name="ShellModalDialogWindow" Title="{Binding Title}" Content="{Binding Content}" Background="{DynamicResource WindowBackgroundBrush}">
+    <cl:ChildWindow.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/StockTraderTransaq;component/resources/Styles.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</cl:ChildWindow.Resources>
+
+    <cl:ChildWindow.Navigation>
+		<StackPanel Grid.Row="1" Margin="0,31,0,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+            <Button x:Name="OkButton" Margin="0,0,32,0" TabIndex="0" Template="{StaticResource SubmitButtonTemplate}" Cursor="Hand" Height="25">
+				<i:Interaction.Triggers>
+					<i:EventTrigger EventName="Click">
+						<ei:ChangePropertyAction PropertyName="Confirmed" TargetObject="{Binding}" Value="True" />
+						<ei:CallMethodAction TargetObject="{Binding ElementName=ShellModalDialogWindow}" MethodName="Close" />
+					</i:EventTrigger>
+				</i:Interaction.Triggers>
+			</Button>
+            <Button x:Name="CancelButton" TabIndex="1" IsCancel="True" Template="{StaticResource CancelButtonTemplate}" Cursor="Hand" Height="25">
+				<i:Interaction.Triggers>
+					<i:EventTrigger EventName="Click">
+						<ei:CallMethodAction TargetObject="{Binding ElementName=ShellModalDialogWindow}" MethodName="Close" />
+					</i:EventTrigger>
+				</i:Interaction.Triggers>
+			</Button>
+		</StackPanel>
+	</cl:ChildWindow.Navigation>
+</cl:ChildWindow>

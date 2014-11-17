@@ -1,0 +1,151 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:StockTraderTransaq.ControlLibrary">
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/StockTraderTransaq.ControlLibrary;component/Themes/Styles.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</ResourceDictionary.MergedDictionaries>
+
+	<Style TargetType="{x:Type local:PageContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+				<ControlTemplate TargetType="{x:Type local:PageContentControl}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+						<StackPanel Orientation="Vertical">
+							<ContentPresenter ContentSource="Header" />
+							<ContentPresenter />
+							<ContentPresenter ContentSource="Footer" />
+						</StackPanel>
+					</Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <BooleanToVisibilityConverter x:Key="ActiveConverter" />
+
+    <ControlTemplate x:Key="ShellControlTemplate" TargetType="{x:Type local:ShellWindow}">
+        <Border x:Name="WindowBorder"
+                Margin="{Binding Source={x:Static SystemParameters.WindowNonClientFrameThickness}}" 
+                Background="{TemplateBinding Background}" 
+                BorderBrush="{DynamicResource InactiveWindowBorderBrush}"
+                BorderThickness="1">
+			<Grid x:Name="LayoutRoot">
+				<AdornerDecorator>
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="*" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+						<ContentPresenter ContentSource="SeparatorLine" Margin="0,0,0,15" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                        <Grid VerticalAlignment="Top" WindowChrome.IsHitTestVisibleInChrome="True" Margin="10,0,10,15">
+							<Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
+                            <ContentPresenter ContentSource="TitleLeftPart" HorizontalAlignment="Left" Height="60" Margin="5 0 0 0" />
+                            <TextBlock Grid.Column="1" 
+                                        Margin="10,0,0,0" 
+                                        Text="{TemplateBinding Title}" 
+                                        HorizontalAlignment="Left" 
+                                        VerticalAlignment="Center" 
+                                        TextTrimming="CharacterEllipsis" 
+                                        FontFamily="Segoe UI" 
+                                        FontWeight="Normal" 
+                                        FontSize="18" />
+                            <ContentPresenter Grid.Column="2" ContentSource="TitleRightPart" HorizontalAlignment="Right" />
+						</Grid>
+						<ContentPresenter Grid.Row="1" />
+                        <ContentPresenter Grid.Row="2" ContentSource="Navigation" />
+					</Grid>
+				</AdornerDecorator>
+                <Border 
+                    Margin="-1"
+                    BorderBrush="{DynamicResource WindowBorderBrush}" 
+                    BorderThickness="1" 
+                    Visibility="{Binding IsActive, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Converter={StaticResource ActiveConverter}}" />
+			</Grid>
+		</Border>
+	</ControlTemplate>
+
+	<Style TargetType="{x:Type local:ShellWindow}">
+		<Setter Property="Background" Value="{StaticResource WindowBackgroundBrush}" />
+		<Setter Property="ResizeMode" Value="NoResize" />
+		<Setter Property="UseLayoutRounding" Value="True" />
+		<Setter Property="WindowStyle" Value="None" />
+		<Setter Property="WindowState" Value="Normal" />
+		<Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="FontFamily" Value="Segoe UI Semilight" />
+		<Setter Property="Template" Value="{StaticResource ShellControlTemplate}" />
+		<Setter Property="WindowChrome.WindowChrome">
+			<Setter.Value>
+				<WindowChrome CornerRadius="0" NonClientFrameEdges="None" GlassFrameThickness="0,0,0,1" CaptionHeight="50" UseAeroCaptionButtons="False" ResizeBorderThickness="0" />
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+    <Style TargetType="{x:Type local:ChildWindow}">
+        <Setter Property="ShowInTaskbar" Value="False" />
+        <Setter Property="ResizeMode" Value="NoResize" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="AllowsTransparency" Value="True" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="FontFamily" Value="Segoe UI Semilight" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ChildWindow}">
+                    <Border x:Name="WindowBorder" Background="#90000000" Margin="{Binding Source={x:Static SystemParameters.WindowNonClientFrameThickness}}">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}"
+								VerticalAlignment="Center" HorizontalAlignment="Center" 
+								Width="{TemplateBinding Width}">
+                                <Border.Effect>
+                                    <DropShadowEffect Color="White" Opacity="0.5" Direction="270" ShadowDepth="0.7" />
+                                </Border.Effect>
+                                <AdornerDecorator>
+                                    <Grid Margin="50,15,60,24">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="60" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Text="{TemplateBinding Title}" 
+                                                   HorizontalAlignment="Left" 
+                                                   TextTrimming="CharacterEllipsis" 
+                                                   Margin="0,5,0,0" 
+                                                   FontFamily="Segoe UI Semilight" 
+                                                   FontWeight="Normal" 
+                                                   FontSize="26px" />
+
+                                        <ContentPresenter Grid.Row="1" ContentTemplate="{TemplateBinding NotificationTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+                                        <ContentPresenter Grid.Row="2" ContentSource="Navigation" />
+                                    </Grid>
+                                </AdornerDecorator>
+                            </Border>
+                            <Border BorderBrush="{StaticResource WindowBorderBrush}" BorderThickness="1" Visibility="{Binding IsActive, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Converter={StaticResource ActiveConverter}}" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome CornerRadius="0" NonClientFrameEdges="None" GlassFrameThickness="0" CaptionHeight="0" UseAeroCaptionButtons="False" ResizeBorderThickness="0" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>
