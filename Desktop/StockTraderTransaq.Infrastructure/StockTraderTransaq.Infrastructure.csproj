@@ -104,6 +104,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -155,6 +156,7 @@
     <Compile Include="InputValidationException.cs" />
     <Compile Include="Interfaces\IHeaderInfoProvider.cs" />
     <Compile Include="Behaviors\IViewRegionRegistration.cs" />
+    <Compile Include="Interfaces\IModalDialogView.cs" />
     <Compile Include="MarketPricesUpdatedEvent.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
@@ -178,6 +180,7 @@
     <Compile Include="TickerSymbolSelectedEvent.cs" />
     <Compile Include="TransactionType.cs" />
     <Compile Include="TreeHelper.cs" />
+    <Compile Include="ValidationBindableBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

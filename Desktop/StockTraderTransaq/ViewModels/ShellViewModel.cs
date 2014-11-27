@@ -25,13 +25,16 @@ using Microsoft.Practices.Prism.Mvvm;
 using StockTraderTransaq.InteractionRequests;
 using System.ComponentModel;
 using Microsoft.Practices.ServiceLocation;
+using TransaqModelComponent;
 
 namespace StockTraderTransaq
 {
     [Export]
-    public class ShellViewModel : BindableBase
+    public class ShellViewModel : BindableBase, IDisposable
     {
         // This is where any view model logic for the shell would go.
+
+        private TransaqConnector transaqConnector;
 
         public string Title { get; set; }
 
@@ -41,7 +44,7 @@ namespace StockTraderTransaq
 
         public InteractionRequest<IConfirmation> ConfirmationRequest { get; private set; }
         public InteractionRequest<INotification> NotificationRequest { get; private set; }
-        public InteractionRequest<Dialog> DialogRequest { get; private set; }
+        public InteractionRequest<LoginViewModel> DialogRequest { get; private set; }
 
         public ICommand LoadedCommand { get; private set; }
 
@@ -52,7 +55,7 @@ namespace StockTraderTransaq
 
             this.ConfirmationRequest = new InteractionRequest<IConfirmation>();
             this.NotificationRequest = new InteractionRequest<INotification>();
-            this.DialogRequest = new InteractionRequest<Dialog>();
+            this.DialogRequest = new InteractionRequest<LoginViewModel>();
 
             // Commands for each of the buttons. Each of these raise a different interaction request.
             this.RaiseAboutCommand = new DelegateCommand(this.OnAbout);
@@ -60,6 +63,8 @@ namespace StockTraderTransaq
             this.RaiseCloseCommand = new DelegateCommand(this.OnClose);
 
             this.LoadedCommand = new DelegateCommand<RoutedEventArgs>(this.OnLoaded);
+
+            transaqConnector = new TransaqConnector();
         }
 
         private void OnLoaded(RoutedEventArgs obj)
@@ -69,26 +74,38 @@ namespace StockTraderTransaq
 
         private void CallLoginDialog()
         {
-            var dialog = new Dialog
-            {
-                Title = "Login",
-                OkContent = StockTraderTransaq.Properties.Resources.Ok,
-                CancelContent = StockTraderTransaq.Properties.Resources.Cancel,
-                Content = ServiceLocator.Current.GetInstance<Login>()
-            };
+            var dialog = ServiceLocator.Current.GetInstance<LoginViewModel>();
+            dialog.Title = StockTraderTransaq.Properties.Resources.LoginTitle;
+            dialog.OkContent = StockTraderTransaq.Properties.Resources.Ok;
+            dialog.CancelContent = StockTraderTransaq.Properties.Resources.Cancel;
+            dialog.Content = ServiceLocator.Current.GetInstance<Login>();
 
             this.DialogRequest.Raise(dialog, this.OnCloseLoginDialogEventHandler);
         }
 
-        private void OnCloseLoginDialogEventHandler(Dialog d)
+        private void OnCloseLoginDialogEventHandler(LoginViewModel loginViewModel)
         {
-            if (d.Confirmed)
+            if (loginViewModel.Confirmed)
             {
-                /*var viewModel = Addons.SingleOrDefault(a => a.Manifest.Id.Equals(d.Id));
-                if (viewModel != null)
+                // определение папки, в которой запущена программа
+                string logPath = String.Concat(System.IO.Directory.GetCurrentDirectory(), "\0");
+
+                transaqConnector.Initialize(logPath, 2);
+
+                var task = transaqConnector.Connect(loginViewModel.Login, loginViewModel.Password, "213.247.141.133", 3900, logPath);
+
+                try
                 {
-                    viewModel.ActionCommand.Execute();
-                }*/
+                    task.Wait();
+                }
+                catch (AggregateException ex)
+                {
+                    Console.WriteLine(ex.InnerException.Message);
+                }
+            }
+            else
+            {
+                Application.Current.Shutdown(-1);
             }
         }
 
@@ -117,6 +134,11 @@ namespace StockTraderTransaq
                         Title = StockTraderTransaq.Properties.Resources.ConfirmExitTitle
                     },
                     cb => { if (cb.Confirmed) Application.Current.MainWindow.Close(); });
+        }
+
+        public void Dispose()
+        {
+            transaqConnector.Dispose();
         }
     }
 }

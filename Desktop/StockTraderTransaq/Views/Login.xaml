@@ -4,13 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewmodels="clr-namespace:StockTraderTransaq"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:inf="clr-namespace:StockTraderTransaq.Infrastructure;assembly=StockTraderTransaq.Infrastructure"
              xmlns:infConverters="clr-namespace:StockTraderTransaq.Infrastructure.Converters;assembly=StockTraderTransaq.Infrastructure"
+             xmlns:behaviors="clr-namespace:StockTraderTransaq.Infrastructure.Behaviors;assembly=StockTraderTransaq.Infrastructure"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-			 d:DataContext="{d:DesignInstance viewmodels:LoginViewModel}">
+			 d:DataContext="{d:DesignInstance viewmodels:LoginViewModel}" VerticalAlignment="Center" HorizontalAlignment="Center">
     <UserControl.Resources>
-
         <ControlTemplate x:Key="ErrorTemplate">
             <Border BorderBrush="Red" BorderThickness="2">
                 <AdornedElementPlaceholder />
@@ -32,6 +33,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -39,9 +41,17 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Text="Login:" Foreground="#FF444444" VerticalAlignment="Center" Width="Auto" Height="Auto" Margin="5,0,0,0" />
-        <TextBox Grid.Column="1" AutomationProperties.AutomationId="SharesTextBox" Name="SharesTextBox" Text="{Binding Path=Login, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True, Converter={StaticResource stringToNullableNumberConverter}}" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" HorizontalAlignment="Stretch" Width="120" Height="Auto" Margin="15" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1" AutomationProperties.AutomationId="SharesTextBox" Name="SharesTextBox" 
+                 Text="{Binding Path=Login, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True, Converter={StaticResource stringToNullableNumberConverter}}" 
+                 Validation.ErrorTemplate="{StaticResource ErrorTemplate}" 
+                 HorizontalAlignment="Stretch" Width="120" Height="Auto" Margin="15" VerticalAlignment="Center"/>
 
         <TextBlock Grid.Row="1" Text="Password:" Foreground="#FF444444" VerticalAlignment="Center" Width="Auto" Height="Auto" Grid.ColumnSpan="1" Margin="5,0,0,0" />
-        <PasswordBox Grid.Column="1" Grid.Row="1" PasswordChar="*" HorizontalAlignment="Stretch" Width="120" Height="Auto" Margin="15" VerticalAlignment="Center"/>
+        <PasswordBox Grid.Column="1" Grid.Row="1" PasswordChar="*" HorizontalAlignment="Stretch" Width="120" Height="Auto" Margin="15" VerticalAlignment="Center" Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+            <i:Interaction.Behaviors>
+                <behaviors:PasswordBehavior Password="{Binding Path=Password, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"/>
+            </i:Interaction.Behaviors>
+        </PasswordBox>
+        <ProgressBar Grid.Row="2" Grid.ColumnSpan="2" Minimum="0" Maximum="100" Height="20" IsIndeterminate="True" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
     </Grid>
 </UserControl>

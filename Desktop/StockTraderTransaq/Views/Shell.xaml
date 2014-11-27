@@ -120,17 +120,7 @@
     </ControlLibrary:ShellWindow.SeparatorLine>
 
     <ControlLibrary:ShellWindow.TitleLeftPart>
-        <!--Button Command="{Binding RaiseMinimizeCommand}" 
-					FontWeight="Thin"
-					Content="▂" 
-					TextOptions.TextFormattingMode="Display"
-					ToolTip="{Binding ContentMinimize}" 
-					Style="{StaticResource SpecialButtonStyle}" 
-					TextBlock.LineHeight="10" 
-					Margin="0,0,8,0" /-->
-        <Canvas>
-            <Image Source="pack://application:,,,/StockTraderTransaq;component/Resources/logo.png" Width="28" Height="28" HorizontalAlignment="Left" />
-        </Canvas>
+        <Image Source="pack://application:,,,/StockTraderTransaq;component/Resources/logo.png" HorizontalAlignment="Left" VerticalAlignment="Center" />
     </ControlLibrary:ShellWindow.TitleLeftPart>
 
     <ControlLibrary:ShellWindow.TitleRightPart>
@@ -181,8 +171,6 @@
                     <ColumnDefinition Width="*" MinWidth="650" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-
-                <Image Source="pack://application:,,,/StockTraderTransaq;component/Resources/logo.png" Width="28" Height="28" HorizontalAlignment="Left" />
                 
                 <!-- main bar -->
                 <ItemsControl x:Name="MainToolbar" cal:RegionManager.RegionName="{x:Static inf:RegionNames.MainToolBarRegion}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,10,0" Grid.Row="1" RenderTransformOrigin="0.5,0.5">

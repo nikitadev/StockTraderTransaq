@@ -18,9 +18,7 @@ using System;
 
 namespace StockTraderTransaq.Infrastructure
 {
-#if !SILVERLIGHT
     [Serializable]
-#endif
     public class InputValidationException : Exception
     {
         public InputValidationException()
@@ -35,12 +33,10 @@ namespace StockTraderTransaq.Infrastructure
         {
         }
 
-#if !SILVERLIGHT
         protected InputValidationException(
                 System.Runtime.Serialization.SerializationInfo info,
                 System.Runtime.Serialization.StreamingContext context) : base(info, context)
         {
         }
-#endif
     }
 }

@@ -18,6 +18,7 @@ using System.Windows;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using StockTraderTransaq.ControlLibrary;
+using System;
 
 namespace StockTraderTransaq
 {
@@ -30,6 +31,16 @@ namespace StockTraderTransaq
         public Shell()
         {
             InitializeComponent();
+
+            this.Closing += Shell_Closing;
+        }
+
+        void Shell_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (DataContext is IDisposable)
+            {
+                (DataContext as IDisposable).Dispose();
+            }
         }
 
         /// <summary>

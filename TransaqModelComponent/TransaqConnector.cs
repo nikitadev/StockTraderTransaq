@@ -129,7 +129,10 @@ namespace TransaqModelComponent
 
         public void Dispose()
         {
-            Disconect().Wait();
+            if (isConnected)
+            {
+                Disconect().Wait();
+            }
 
             Clean().Wait();
         }

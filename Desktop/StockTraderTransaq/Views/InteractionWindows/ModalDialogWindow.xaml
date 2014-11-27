@@ -6,12 +6,12 @@
                 xmlns:ei="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
                 x:Name="ShellModalDialogWindow" Title="{Binding Title}" Background="{DynamicResource WindowBackgroundBrush}" Template="{DynamicResource ModalDialogControlTemplate}">
     <cl:ChildWindow.Resources>
-		<ResourceDictionary>
-			<ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/StockTraderTransaq;component/Resources/Styles.xaml" />
-			</ResourceDictionary.MergedDictionaries>
-		</ResourceDictionary>
-	</cl:ChildWindow.Resources>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </cl:ChildWindow.Resources>
 
     <cl:ChildWindow.Content>
 		<ContentControl x:Name="MainContent" Margin="80,0,75,0" Focusable="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{Binding Content}" />
@@ -19,11 +19,11 @@
 
     <cl:ChildWindow.Navigation>
         <StackPanel Grid.Row="1" Margin="0,31,60,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
-            <Button x:Name="OkButton" Content="{Binding OkContent}" Margin="0,0,32,0" TabIndex="0" IsEnabled="{Binding IsOkEnable, ElementName=ShellModalDialogWindow}" Template="{StaticResource SubmitButtonTemplate}" Cursor="Hand" Height="25">
+            <Button x:Name="OkButton" Content="{Binding OkContent}" Margin="0,0,32,0" TabIndex="0" IsEnabled="{Binding HasErrors, ElementName=ShellModalDialogWindow, Converter={StaticResource InverterBolleanConverter}}" Template="{StaticResource SubmitButtonTemplate}" Cursor="Hand" Height="25">
 				<i:Interaction.Triggers>
 					<i:EventTrigger EventName="Click">
 						<ei:ChangePropertyAction PropertyName="Confirmed" TargetObject="{Binding}" Value="True" />
-						<ei:CallMethodAction TargetObject="{Binding ElementName=ShellModalDialogWindow}" MethodName="Close" />
+						<!--<ei:CallMethodAction TargetObject="{Binding ElementName=ShellModalDialogWindow}" MethodName="Close" />-->
 					</i:EventTrigger>
 				</i:Interaction.Triggers>
 			</Button>

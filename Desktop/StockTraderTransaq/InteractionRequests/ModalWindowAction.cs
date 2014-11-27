@@ -5,6 +5,7 @@
 	using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
     using StockTraderTransaq.InteractionWindowViews;
     using StockTraderTransaq.ControlLibrary;
+    using Microsoft.Practices.ServiceLocation;
 
 	public class ModalWindowAction : ConfirmationWindowAction
 	{
@@ -12,22 +13,10 @@
 		{
 			if (notification is Dialog)
 			{
-				var window =  new ModalDialogWindow { NotificationTemplate = this.ContentTemplate };
+                var dialog = (notification as Dialog);
 
-				var dialog = (notification as Dialog);
-				var dialogContent = dialog.Content;
-
-				/*if (dialogContent is IAddonView)
-				{
-					var context = (dialogContent as IAddonView).ViewContext;
-					context.Validated += async (s, e) =>
-					{
-						await Application.Current.Dispatcher.InvokeAsync(() =>
-						{
-							window.IsOkEnable = !context.HasErrors;
-						}, DispatcherPriority.ContextIdle);
-					};
-				}*/
+				var window = ServiceLocator.Current.GetInstance<ModalDialogWindow>();
+                window.NotificationTemplate = this.ContentTemplate;
 
 				return window;
 			}

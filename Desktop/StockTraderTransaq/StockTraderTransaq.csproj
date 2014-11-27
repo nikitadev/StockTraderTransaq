@@ -49,7 +49,7 @@
     </CodeAnalysisRules>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -112,6 +112,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -211,6 +212,7 @@
     <Compile Include="Converters\InverterBolleanConverter.cs" />
     <Compile Include="Converters\NotBooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\StringToEnabledConverter.cs" />
+    <Compile Include="ViewModels\InteractionWindows\ModalDialogViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="Views\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
@@ -306,6 +308,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\TransaqModelComponent\TransaqModelComponent.csproj">
+      <Project>{96fc5824-51ad-427b-a94f-8a0da4d31161}</Project>
+      <Name>TransaqModelComponent</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StockTraderTransaq.ControlLibrary\StockTraderTransaq.ControlLibrary.csproj">
       <Project>{e32cfa23-eba2-40bc-9463-d64219a0fc01}</Project>
       <Name>StockTraderTransaq.ControlLibrary</Name>
@@ -345,6 +351,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

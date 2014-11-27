@@ -29,12 +29,13 @@ namespace StockTraderTransaq
         {
             base.OnStartup(e);
 
+            this.ShutdownMode = ShutdownMode.OnMainWindowClose;
+
 #if (DEBUG)
             RunInDebugMode();
 #else
             RunInReleaseMode();
 #endif
-            this.ShutdownMode = ShutdownMode.OnMainWindowClose;
         }
 
         private static void RunInDebugMode()
