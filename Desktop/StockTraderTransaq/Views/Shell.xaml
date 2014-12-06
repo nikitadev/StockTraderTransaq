@@ -96,10 +96,14 @@
             <ir:ConfirmationWindowAction OkContent="{x:Static properties:Resources.Yes}" CancelContent="{x:Static properties:Resources.No}" />
         </prism:InteractionRequestTrigger>
 
-        <prism:InteractionRequestTrigger SourceObject="{Binding DialogRequest, Mode=OneWay}">
+        <prism:InteractionRequestTrigger SourceObject="{Binding LoginRequest, Mode=OneWay}">
             <ir:ModalWindowAction />
         </prism:InteractionRequestTrigger>
-        
+
+        <prism:InteractionRequestTrigger SourceObject="{Binding LoadingRequest, Mode=OneWay}">
+            <ir:ModalWindowAction />
+        </prism:InteractionRequestTrigger>
+
         <prism:InteractionRequestTrigger SourceObject="{Binding NotificationRequest, Mode=OneWay}">
             <ir:PopupWindowAction OkContent="{x:Static properties:Resources.Ok}" ContentTemplate="{StaticResource AboutDataTemplate}" />
         </prism:InteractionRequestTrigger>

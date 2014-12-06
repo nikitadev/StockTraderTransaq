@@ -13,13 +13,17 @@ namespace TransaqModelComponent
 
         private readonly TXmlConnectorEventManager eventManager;
 
-        private bool isConnected = false;
+        private bool isConnected, isInitialized;
 
-        private string error = String.Empty;
+        private string error;
+
+        public bool IsConnected { get { return isConnected; } }
 
         public TransaqConnector()
         {
-            eventManager = new TXmlConnectorEventManager();
+            this.isConnected = false;
+            this.error = String.Empty;
+            this.eventManager = new TXmlConnectorEventManager();
         }
 
         public async Task Initialize(string path, short logLevel)
@@ -29,6 +33,8 @@ namespace TransaqModelComponent
             using (var connector = new TXmlConnectorWrapper())
             {
                 string result = await Task.Run(() => connector.Initialize(path, logLevel));
+
+                isInitialized = true;
             }
         }
 
@@ -63,9 +69,9 @@ namespace TransaqModelComponent
             }
 		}
 
-        private async Task CommandProgress(bool isLooping)
+        private async Task CommandProgress()
         { 
-            while (isConnected != isLooping)
+            while (isConnected)
             {
                 if (String.IsNullOrEmpty(error))
                 {
@@ -92,7 +98,7 @@ namespace TransaqModelComponent
             var result = await SendCommand<Result>(command);
             if (result.Success)
             {
-                await CommandProgress(true);
+                //await CommandProgress();
             }
         }
 
@@ -103,7 +109,7 @@ namespace TransaqModelComponent
             var result = await SendCommand<Result>(new Command(CommandNames.Disconnection));
             if (result.Success)
             {
-                await CommandProgress(false);
+                //await CommandProgress();
             }
         }
 
@@ -119,22 +125,25 @@ namespace TransaqModelComponent
         /// </summary>
         /// <see cref="Dispose"/>
         /// <returns></returns>
-        public async Task Clean()
+        public void Clean()
         { 
             using (var connector = new TXmlConnectorWrapper())
             {
-                string result = await Task.Run(() => connector.Finalize());
+                connector.Finalize();
             }
         }
 
         public void Dispose()
         {
+            if (!isInitialized)
+                return;
+
             if (isConnected)
             {
-                Disconect().Wait();
+                Disconect().Wait();                
             }
 
-            Clean().Wait();
+            Clean();
         }
     }
 }

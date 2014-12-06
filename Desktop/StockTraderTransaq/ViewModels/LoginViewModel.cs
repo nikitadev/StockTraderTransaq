@@ -34,7 +34,5 @@ namespace StockTraderTransaq
                 SetProperty(ref password, value);
             }
         }
-
-        public bool IsVisible { get; set; }
     }
 }

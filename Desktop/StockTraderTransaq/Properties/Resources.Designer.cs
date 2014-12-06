@@ -106,6 +106,15 @@ namespace StockTraderTransaq.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading....
+        /// </summary>
+        public static string LoadingTitle {
+            get {
+                return ResourceManager.GetString("LoadingTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string LoginTitle {

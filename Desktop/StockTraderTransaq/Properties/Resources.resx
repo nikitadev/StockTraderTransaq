@@ -132,6 +132,9 @@
   <data name="ConfirmExitTitle" xml:space="preserve">
     <value>Exiting application</value>
   </data>
+  <data name="LoadingTitle" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
   <data name="LoginTitle" xml:space="preserve">
     <value>Login</value>
   </data>

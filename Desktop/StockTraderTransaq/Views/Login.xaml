@@ -33,7 +33,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -52,6 +51,5 @@
                 <behaviors:PasswordBehavior Password="{Binding Path=Password, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"/>
             </i:Interaction.Behaviors>
         </PasswordBox>
-        <ProgressBar Grid.Row="2" Grid.ColumnSpan="2" Minimum="0" Maximum="100" Height="20" IsIndeterminate="True" Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
     </Grid>
 </UserControl>

@@ -195,6 +195,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Loading.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Shell.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -213,6 +217,7 @@
     <Compile Include="Converters\NotBooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\StringToEnabledConverter.cs" />
     <Compile Include="ViewModels\InteractionWindows\ModalDialogViewModel.cs" />
+    <Compile Include="ViewModels\LoadingViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="Views\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
@@ -262,6 +267,9 @@
     <Compile Include="Resources\ResourceNames.cs" />
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Loading.xaml.cs">
+      <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>

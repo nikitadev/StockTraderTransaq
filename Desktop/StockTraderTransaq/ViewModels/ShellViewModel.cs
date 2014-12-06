@@ -34,7 +34,7 @@ namespace StockTraderTransaq
     {
         // This is where any view model logic for the shell would go.
 
-        private TransaqConnector transaqConnector;
+        private readonly TransaqConnector transaqConnector;
 
         public string Title { get; set; }
 
@@ -44,27 +44,30 @@ namespace StockTraderTransaq
 
         public InteractionRequest<IConfirmation> ConfirmationRequest { get; private set; }
         public InteractionRequest<INotification> NotificationRequest { get; private set; }
-        public InteractionRequest<LoginViewModel> DialogRequest { get; private set; }
+        public InteractionRequest<LoginViewModel> LoginRequest { get; private set; }
+        public InteractionRequest<LoadingViewModel> LoadingRequest { get; private set; }
 
         public ICommand LoadedCommand { get; private set; }
 
         [ImportingConstructor]
         public ShellViewModel()
         {
+            this.transaqConnector = new TransaqConnector();
+
             this.Title = StockTraderTransaq.Properties.Resources.Title;
 
             this.ConfirmationRequest = new InteractionRequest<IConfirmation>();
             this.NotificationRequest = new InteractionRequest<INotification>();
-            this.DialogRequest = new InteractionRequest<LoginViewModel>();
+
+            this.LoginRequest = new InteractionRequest<LoginViewModel>();
+            this.LoadingRequest = new InteractionRequest<LoadingViewModel>();
 
             // Commands for each of the buttons. Each of these raise a different interaction request.
             this.RaiseAboutCommand = new DelegateCommand(this.OnAbout);
-            this.RaiseMinimizeCommand = new DelegateCommand(this.OnMinimize);
             this.RaiseCloseCommand = new DelegateCommand(this.OnClose);
+            this.RaiseMinimizeCommand = new DelegateCommand(this.OnMinimize);
 
             this.LoadedCommand = new DelegateCommand<RoutedEventArgs>(this.OnLoaded);
-
-            transaqConnector = new TransaqConnector();
         }
 
         private void OnLoaded(RoutedEventArgs obj)
@@ -80,33 +83,39 @@ namespace StockTraderTransaq
             dialog.CancelContent = StockTraderTransaq.Properties.Resources.Cancel;
             dialog.Content = ServiceLocator.Current.GetInstance<Login>();
 
-            this.DialogRequest.Raise(dialog, this.OnCloseLoginDialogEventHandler);
+            this.LoginRequest.Raise(dialog, this.OnCloseLoginDialogEventHandler);
+
+            CreateLoadingDialog();
         }
 
-        private void OnCloseLoginDialogEventHandler(LoginViewModel loginViewModel)
+        private async void OnCloseLoginDialogEventHandler(LoginViewModel loginViewModel)
         {
             if (loginViewModel.Confirmed)
-            {
+            {               
                 // определение папки, в которой запущена программа
                 string logPath = String.Concat(System.IO.Directory.GetCurrentDirectory(), "\0");
 
-                transaqConnector.Initialize(logPath, 2);
+                await transaqConnector.Initialize(logPath, 2);
 
-                var task = transaqConnector.Connect(loginViewModel.Login, loginViewModel.Password, "213.247.141.133", 3900, logPath);
+                await transaqConnector.Connect(loginViewModel.Login, loginViewModel.Password, "213.247.141.133", 3900, logPath);
 
-                try
+                if (transaqConnector.IsConnected)
                 {
-                    task.Wait();
-                }
-                catch (AggregateException ex)
-                {
-                    Console.WriteLine(ex.InnerException.Message);
                 }
             }
             else
             {
-                Application.Current.Shutdown(-1);
+                Environment.Exit(-1);
             }
+        }
+
+        private void CreateLoadingDialog()
+        { 
+            var dialog = ServiceLocator.Current.GetInstance<LoadingViewModel>();
+            dialog.Title = Properties.Resources.LoadingTitle;
+            dialog.Content = ServiceLocator.Current.GetInstance<Loading>();
+
+            this.LoadingRequest.Raise(dialog);
         }
 
         private void OnAbout()

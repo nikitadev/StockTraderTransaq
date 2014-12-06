@@ -23,8 +23,8 @@
 				<i:Interaction.Triggers>
 					<i:EventTrigger EventName="Click">
 						<ei:ChangePropertyAction PropertyName="Confirmed" TargetObject="{Binding}" Value="True" />
-						<!--<ei:CallMethodAction TargetObject="{Binding ElementName=ShellModalDialogWindow}" MethodName="Close" />-->
-					</i:EventTrigger>
+                        <ei:CallMethodAction TargetObject="{Binding ElementName=ShellModalDialogWindow}" MethodName="Close" />
+                    </i:EventTrigger>
 				</i:Interaction.Triggers>
 			</Button>
             <Button x:Name="CancelButton" Content="{Binding CancelContent}" TabIndex="1" IsCancel="True" Template="{StaticResource CancelButtonTemplate}" Cursor="Hand" Height="25">
