@@ -1,7 +1,10 @@
 ﻿using System.Xml.Serialization;
 
-namespace TransaqModelComponent.Models
+namespace TransaqModelComponent.Models.Commands
 {
+    /// <summary>
+    /// cancelorder
+    /// </summary>
     public class CancelOrder : Command
     {
         [XmlElement("transactionid")]

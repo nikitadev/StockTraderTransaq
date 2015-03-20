@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using TransaqModelComponent.Helpers;
 using TransaqModelComponent.Infrastructure;
 using TransaqModelComponent.Models;
+using TransaqModelComponent.Models.Commands;
 using TransaqModelComponent.Models.Events;
 
 namespace TransaqModelComponent
@@ -23,6 +24,7 @@ namespace TransaqModelComponent
         {
             this.isConnected = false;
             this.error = String.Empty;
+
             this.eventManager = new TXmlConnectorEventManager();
         }
 

@@ -1423,7 +1423,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Image Source="{Binding Image}" HorizontalAlignment="Left" Margin="0,0,22,0" />
-                                <TextBlock Grid.Column="1" Text="{Binding Title}" HorizontalAlignment="Left" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0,0,0,15" FontFamily="Segoe UI" FontWeight="Normal" FontSize="18px" />
+                                <TextBlock Grid.Column="1" Text="{Binding Title}" HorizontalAlignment="Left" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0,0,0,15" FontFamily="Segoe UI" FontWeight="Normal" FontSize="17px" />
                             </Grid>
                             <ScrollViewer Grid.Row="1" Margin="0,15,0,0" VerticalScrollBarVisibility="Auto">
                                 <ContentPresenter ContentTemplate="{TemplateBinding NotificationTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />

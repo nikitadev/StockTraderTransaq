@@ -38,6 +38,10 @@ namespace StockTraderTransaq
 
         public string Title { get; set; }
 
+        public bool IsContentGridVisible { get; set; }
+
+        public bool IsSideGridVisible { get; set; }
+
         public ICommand RaiseAboutCommand { get; set; }
         public ICommand RaiseMinimizeCommand { get; set; }
         public ICommand RaiseCloseCommand { get; set; }
@@ -56,6 +60,10 @@ namespace StockTraderTransaq
 
             this.Title = StockTraderTransaq.Properties.Resources.Title;
 
+            this.IsContentGridVisible = false;
+
+            this.IsSideGridVisible = false;
+
             this.ConfirmationRequest = new InteractionRequest<IConfirmation>();
             this.NotificationRequest = new InteractionRequest<INotification>();
 
@@ -68,6 +76,11 @@ namespace StockTraderTransaq
             this.RaiseMinimizeCommand = new DelegateCommand(this.OnMinimize);
 
             this.LoadedCommand = new DelegateCommand<RoutedEventArgs>(this.OnLoaded);
+        }
+
+        ~ShellViewModel()
+        {
+            Dispose();
         }
 
         private void OnLoaded(RoutedEventArgs obj)
@@ -101,6 +114,9 @@ namespace StockTraderTransaq
 
                 if (transaqConnector.IsConnected)
                 {
+                    this.IsContentGridVisible = true;
+
+                    this.IsSideGridVisible = true;
                 }
             }
             else

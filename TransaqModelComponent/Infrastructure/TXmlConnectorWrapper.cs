@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TransaqModelComponent.Helpers;
 
 namespace TransaqModelComponent.Infrastructure
 {
-    internal sealed class TXmlConnectorWrapper : IDisposable
+    internal sealed class TXmlConnectorWrapper : ITXmlConnectorWrapper
     {
         private IntPtr pResult;
 

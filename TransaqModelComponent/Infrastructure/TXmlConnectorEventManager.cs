@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TransaqModelComponent.Helpers;
 
 namespace TransaqModelComponent.Infrastructure
 {
-    public sealed class TXmlConnectorEventManager
+    public sealed class TXmlConnectorEventManager : IEventManager
     {
         private readonly IDictionary<string, IEventCallback> callbacks;
         
@@ -32,6 +31,7 @@ namespace TransaqModelComponent.Infrastructure
             {
                 throw (new TransaqConnectorException());
             }
+
             if (!TXmlConnectorHelper.SetCallbackEx(connectorCallbackEx, IntPtr.Zero))
             {
                 throw (new TransaqConnectorException());

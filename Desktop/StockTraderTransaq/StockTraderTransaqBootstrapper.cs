@@ -49,7 +49,7 @@ namespace StockTraderTransaq
 
         protected override void ConfigureServiceLocator()
         {
-            IServiceLocator serviceLocator = this.Container.GetExportedValue<IServiceLocator>();
+            var serviceLocator = this.Container.GetExportedValue<IServiceLocator>();
             ServiceLocator.SetLocatorProvider(() => serviceLocator);
         }
 

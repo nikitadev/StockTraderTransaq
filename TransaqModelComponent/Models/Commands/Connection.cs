@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace TransaqModelComponent.Models
+namespace TransaqModelComponent.Models.Commands
 {
+    /// <summary>
+    /// connect
+    /// </summary>
     public sealed class Connection : Command
     {
         [XmlElement(ElementName = "login")]

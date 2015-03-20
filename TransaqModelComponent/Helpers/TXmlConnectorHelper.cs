@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 
 namespace TransaqModelComponent.Helpers
 {
-    // TODO: Возможно это неверно
     internal delegate bool TXmlConnectorCallback(IntPtr pData);
     internal delegate bool TXmlConnectorCallbackEx(IntPtr pData, IntPtr userData);
 

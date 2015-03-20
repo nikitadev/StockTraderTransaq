@@ -1,9 +1,15 @@
 ﻿using System.Xml.Serialization;
 
-namespace TransaqModelComponent.Models
+namespace TransaqModelComponent.Models.Commands
 {
+    /// <summary>
+    /// Выдать последние N свечей заданного периода, по заданному инструменту
+    /// </summary>
     public sealed class History : Command
     {
+        [XmlElement("security")]
+        public Security Security { get; set; }
+
         [XmlAttribute("period")]
         public string Period { get; set; }
 
@@ -12,9 +18,6 @@ namespace TransaqModelComponent.Models
 
         [XmlAttribute("reset")]
         public bool Reset { get; set; }
-
-        [XmlAttribute("secid")]
-        public string SecId { get; set; }
 
         public History() 
             : base (CommandNames.GetHistoryData)
