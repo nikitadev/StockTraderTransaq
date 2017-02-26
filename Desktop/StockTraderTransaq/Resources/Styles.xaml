@@ -1389,56 +1389,11 @@
         <local:About />
     </DataTemplate>
 
-    <DataTemplate x:Key="LoginDataTemplate">
-        <local:Login />
-    </DataTemplate>
+	<DataTemplate x:Key="LoginDataTemplate">
+		<local:Login />
+	</DataTemplate>
 
-    <ControlTemplate x:Key="ModalDialogControlTemplate" TargetType="{x:Type cl:ChildWindow}">
-        <Border Background="#90000000">
-            <Grid>
-                <Border Background="{StaticResource WindowBackgroundBrush}"
-						VerticalAlignment="Center" HorizontalAlignment="Center" Width="{TemplateBinding Width}">
-                    <Border.Effect>
-                        <DropShadowEffect Color="White" Opacity="0.5" Direction="270" ShadowDepth="0.7" />
-                    </Border.Effect>
-                    <Grid>
-                        <Grid Margin="0,15,0,24">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="50" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-
-                            <Separator Width="666" Height="2" Margin="0,0,-1,0" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                                <Separator.Background>
-                                    <LinearGradientBrush>
-                                        <GradientStop Color="{StaticResource WindowBorderColor}" Offset="1"/>
-                                        <GradientStop Color="{StaticResource WindowBackgroundColor}" Offset="0"/>
-                                    </LinearGradientBrush>
-                                </Separator.Background>
-                            </Separator>
-                            <Grid Margin="25,0,0,15">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Image Source="{Binding Image}" HorizontalAlignment="Left" Margin="0,0,22,0" />
-                                <TextBlock Grid.Column="1" Text="{Binding Title}" HorizontalAlignment="Left" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0,0,0,15" FontFamily="Segoe UI" FontWeight="Normal" FontSize="17px" />
-                            </Grid>
-                            <ScrollViewer Grid.Row="1" Margin="0,15,0,0" VerticalScrollBarVisibility="Auto">
-                                <ContentPresenter ContentTemplate="{TemplateBinding NotificationTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-                            </ScrollViewer>
-
-                            <ContentPresenter Grid.Row="2" ContentSource="Navigation" />
-                        </Grid>
-                    </Grid>
-                </Border>
-                <Border BorderBrush="{StaticResource WindowBorderBrush}" BorderThickness="1" Visibility="{Binding IsActive, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Converter={StaticResource BoolToVisibilityConverter}}" />
-            </Grid>
-        </Border>
-    </ControlTemplate>
-
-    <Style x:Key="ButtonFocusVisualStyle">
+	<Style x:Key="ButtonFocusVisualStyle">
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>

@@ -71,8 +71,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChildWindow.cs" />
-    <Compile Include="ShellWindow.cs" />
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -80,10 +78,6 @@
     <Compile Include="WindowContentControl.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Themes\Styles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

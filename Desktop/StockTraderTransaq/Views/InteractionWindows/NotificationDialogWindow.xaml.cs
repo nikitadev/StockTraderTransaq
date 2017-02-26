@@ -1,10 +1,7 @@
 ﻿namespace StockTraderTransaq.InteractionWindowViews
 {
-    using StockTraderTransaq.ControlLibrary;
-    using StockTraderTransaq.Infrastructure;
-    using StockTraderTransaq.InteractionRequests;
-    using System;
-    using System.Windows;
+	using MahApps.Metro.SimpleChildWindow;
+	using System.Windows;
 
 	/// <summary>
 	/// Interaction logic for NotificationDialogWindow.xaml
@@ -39,7 +36,7 @@
 			{
                 if (OkContent != null)
                 {
-                    OkButton.Visibility = System.Windows.Visibility.Visible;
+                    OkButton.Visibility = Visibility.Visible;
                     OkButton.Content = OkContent;
                 }
 			}

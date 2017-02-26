@@ -21,7 +21,6 @@ using System.Globalization;
 using System.Linq;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
-using Microsoft.Practices.ServiceLocation;
 using StockTraderTransaq.Infrastructure;
 using StockTraderTransaq.Infrastructure.Interfaces;
 using StockTraderTransaq.Infrastructure.Models;
@@ -29,6 +28,7 @@ using StockTraderTransaq.Modules.Position.Interfaces;
 using StockTraderTransaq.Modules.Position.Models;
 using StockTraderTransaq.Modules.Position.Orders;
 using StockTraderTransaq.Modules.Position.Properties;
+using Microsoft.Practices.ServiceLocation;
 
 namespace StockTraderTransaq.Modules.Position.Controllers
 {

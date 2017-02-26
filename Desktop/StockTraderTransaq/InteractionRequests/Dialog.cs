@@ -4,7 +4,7 @@
 	using System.Windows.Media;
 	using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
     using Microsoft.Practices.Prism.Mvvm;
-using StockTraderTransaq.Infrastructure;
+	using StockTraderTransaq.Infrastructure;
 
     public class Dialog : ValidationBindableBase, IConfirmation
 	{

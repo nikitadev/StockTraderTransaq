@@ -3,7 +3,8 @@
 	using System.Windows;
 	using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 	using StockTraderTransaq.InteractionWindowViews;
-    using StockTraderTransaq.ControlLibrary;
+	using StockTraderTransaq.ControlLibrary;
+	using MahApps.Metro.SimpleChildWindow;
 
 	public class ConfirmationWindowAction : PopupWindowAction
 	{
@@ -24,7 +25,9 @@
 		{
 			if (notification is Confirmation)
 			{
-				return new ConfirmationDialogWindow { NotificationTemplate = this.ContentTemplate, CancelContent = this.CancelContent, OkContent = this.OkContent };
+				return new ConfirmationDialogWindow {
+					//NotificationTemplate = this.ContentTemplate,
+					CancelContent = this.CancelContent, OkContent = this.OkContent };
 			}
 
 			return base.CreateDefaultWindow(notification);

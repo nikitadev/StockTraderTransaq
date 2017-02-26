@@ -1,14 +1,11 @@
 ﻿namespace StockTraderTransaq.InteractionRequests
 {
-	using System;
-	using System.Windows.Input;
-	using System.Windows.Threading;
+	using MahApps.Metro.SimpleChildWindow;
 	using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
+	using StockTraderTransaq.InteractionWindowViews;
 	using System.Windows;
 	using System.Windows.Interactivity;
 
-    using StockTraderTransaq.InteractionWindowViews;
-    using StockTraderTransaq.ControlLibrary;
 
 	/// <summary>
 	/// TODO: Update summary.
@@ -103,7 +100,7 @@
 				return;
 			}
 
-			var wrapperWindow = this.GetWindow(args.Context);
+			/*var wrapperWindow = this.GetWindow(args.Context);
 
 			var callback = args.Callback;
 			EventHandler handler = null;
@@ -115,7 +112,7 @@
 				};
 			wrapperWindow.Closed += handler;
 
-			wrapperWindow.ShowDialog();
+			wrapperWindow.ShowDialog();*/
 		}
 
 		/// <summary>
@@ -167,7 +164,9 @@
 
 		protected virtual ChildWindow CreateDefaultWindow(INotification notification)
 		{
-			return new NotificationDialogWindow { NotificationTemplate = this.ContentTemplate, OkContent = this.OkContent };
+			return new NotificationDialogWindow {
+				//NotificationTemplate = this.ContentTemplate,
+				OkContent = this.OkContent };
 		}
 
 		#endregion

@@ -14,33 +14,21 @@
 // organization, product, domain name, email address, logo, person,
 // places, or events is intended or should be inferred.
 //===================================================================================
-using System.Windows;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
-using StockTraderTransaq.ControlLibrary;
-using System;
+using MahApps.Metro.Controls;
 
 namespace StockTraderTransaq
 {
-    /// <summary>
-    /// Interaction logic for Shell.xaml
-    /// </summary>   
-    [Export]
-    public partial class Shell : ShellWindow
-    {
+	/// <summary>
+	/// Interaction logic for Shell.xaml
+	/// </summary>   
+	[Export]
+    public partial class Shell : MetroWindow
+	{
         public Shell()
         {
             InitializeComponent();
-
-            this.Closing += Shell_Closing;
-        }
-
-        void Shell_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (DataContext is IDisposable)
-            {
-                (DataContext as IDisposable).Dispose();
-            }
         }
 
         /// <summary>

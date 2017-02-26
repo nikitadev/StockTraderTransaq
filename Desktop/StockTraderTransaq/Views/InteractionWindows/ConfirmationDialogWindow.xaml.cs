@@ -1,9 +1,12 @@
 ﻿namespace StockTraderTransaq.InteractionWindowViews
 {
-    using StockTraderTransaq.ControlLibrary;
-    using StockTraderTransaq.Infrastructure;
-    using StockTraderTransaq.InteractionRequests;
-    using System.Windows;
+	using StockTraderTransaq.ControlLibrary;
+	using StockTraderTransaq.Infrastructure;
+	using StockTraderTransaq.InteractionRequests;
+	using System.Windows;
+	using MahApps.Metro;
+	using MahApps.Metro.SimpleChildWindow;
+
 
 	/// <summary>
 	/// Interaction logic for PopupWindow.xaml

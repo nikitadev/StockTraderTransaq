@@ -1,16 +1,12 @@
 ﻿namespace StockTraderTransaq.InteractionWindowViews
 {
-    using StockTraderTransaq.ControlLibrary;
-    using StockTraderTransaq.Infrastructure;
-    using StockTraderTransaq.InteractionRequests;
-    using System;
-    using System.ComponentModel.Composition;
-    using System.Windows;
+	using MahApps.Metro.SimpleChildWindow;
+	using System.ComponentModel.Composition;
 
 	/// <summary>
 	/// Interaction logic for ModalDialogWindow.xaml
 	/// </summary>
-    [Export]
+	[Export]
 	public partial class ModalDialogWindow : ChildWindow
 	{
 		public ModalDialogWindow()

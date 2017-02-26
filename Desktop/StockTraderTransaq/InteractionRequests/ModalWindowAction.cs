@@ -1,11 +1,9 @@
 ﻿namespace StockTraderTransaq.InteractionRequests
 {
-	using System.Windows;
-	using System.Windows.Threading;
+	using MahApps.Metro.SimpleChildWindow;
 	using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
-    using StockTraderTransaq.InteractionWindowViews;
-    using StockTraderTransaq.ControlLibrary;
-    using Microsoft.Practices.ServiceLocation;
+	using Microsoft.Practices.ServiceLocation;
+	using StockTraderTransaq.InteractionWindowViews;
 
 	public class ModalWindowAction : ConfirmationWindowAction
 	{
@@ -16,7 +14,7 @@
                 var dialog = (notification as Dialog);
 
 				var window = ServiceLocator.Current.GetInstance<ModalDialogWindow>();
-                window.NotificationTemplate = this.ContentTemplate;
+                //window.NotificationTemplate = this.ContentTemplate;
 
 				return window;
 			}

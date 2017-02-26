@@ -85,7 +85,11 @@ namespace StockTraderTransaq
 
         private void OnLoaded(RoutedEventArgs obj)
         {
-            CallLoginDialog();
+            //CallLoginDialog();
+
+            this.IsContentGridVisible = true;
+
+            this.IsSideGridVisible = true;
         }
 
         private void CallLoginDialog()
